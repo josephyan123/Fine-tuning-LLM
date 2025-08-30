@@ -1,35 +1,28 @@
-```markdown
 # Efficient Fine-Tuning of GPT-2 on TinyStories
 
-This project demonstrates an efficient and robust method for fine-tuning a large language model (LLM)
-on a consumer-grade GPU (Google Colab T4) using the `TinyStories` dataset. It is a practical
-implementation of advanced parameter-efficient fine-tuning (PEFT) techniques, designed to be
-resilient to interruptions and capable of resuming training automatically.
+This project demonstrates an efficient and robust method for fine-tuning a large language model (LLM) on a consumer-grade GPU (Google Colab T4) using the `TinyStories` dataset. It is a practical implementation of advanced parameter-efficient fine-tuning (PEFT) techniques, designed to be resilient to interruptions and capable of resuming training automatically.
 
 ## 🚀 Key Features & Techniques
 
 *   **Model:** GPT-2
 *   **Dataset:** `roneneldan/TinyStories` (streamed for large datasets)
-*   **Core PEFT Method:** **LoRA (Low-Rank Adaptation)** applied to attention layers (`c_attn`, `c_proj`),
-drastically reducing the number of trainable parameters.
+*   **Core PEFT Method:** **LoRA (Low-Rank Adaptation)** applied to attention layers (`c_attn`, `c_proj`), drastically reducing the number of trainable parameters.
 *   **Memory Optimization:**
     *   **4-bit Quantization:** via `bitsandbytes` to load the base model.
     *   **Gradient Checkpointing:** to trade compute for VRAM.
 *   **Training Resilience:**
-    *   **Automatic Checkpoint Resumption:** The script automatically detects the latest saved checkpoint
-and resumes training from there, making it ideal for Colab's runtime limitations.
+    *   **Automatic Checkpoint Resumption:** The script automatically detects the latest saved checkpoint and resumes training from there, making it ideal for Colab's runtime limitations.
     *   **Progress Tracking:** Logs and validation losses are tracked and displayed.
-*   **Advanced Inference:** Includes a generation function with configurable sampling (beam search,
-temperature, top-k, top-p) for high-quality story completion.
+*   **Advanced Inference:** Includes a generation function with configurable sampling (beam search, temperature, top-k, top-p) for high-quality story completion.
 
 ## 📁 Project Structure
 
-The notebook is structured into logical sections:
-1.  **Project Setup:** Installs dependencies, checks GPU, and mounts Google Drive for saving checkpoints.
-2.  **Dataset & Tokenization:** Loads and tokenizes the `TinyStories` dataset with streaming to handle large sizes.
-3.  **Training Setup:** Configures the LoRA model, training arguments (`TrainingArguments`), and the `Trainer` with a custom data collator.
-4.  **Training Loop:** Handles both fresh training and automatic resumption from the latest checkpoint.
-5.  **Generation & Demo:** Provides functions for text generation and a simple IPython widget for an interactive demo.
+The notebook is structured into logical sections:  
+1.  **Project Setup:** Installs dependencies, checks GPU, and mounts Google Drive.
+2.  **Dataset & Tokenization:** Loads and tokenizes the `TinyStories` dataset with streaming.
+3.  **Training Setup:** Configures the LoRA model, training arguments, and the `Trainer`.
+4.  **Training Loop:** Handles both fresh training and automatic resumption.
+5.  **Generation & Demo:** Provides functions for text generation and an interactive demo.
 
 ## 🛠️ Usage
 
@@ -41,7 +34,7 @@ The primary workflow is handled within the notebook. The key steps are:
 
 ## 📊 Results
 
-The training process outputs validation loss metrics, showing a clear downward trend as the model learns to generate more coherent and grammatically correct simple stories.
+The training process outputs validation loss metrics, showing a clear downward trend as the model learns.
 
 | Step | Training Loss | Validation Loss |
 | :--- | :--- | :--- |
@@ -57,5 +50,4 @@ This project provides a foundation that can be extended by:
 
 ---
 
-This project is a companion to the detailed article on efficient LLM fine-tuning [Medium.com artilce](https://medium.com/@josephyan123/practical-fine-tuning-llms-lora-quantization-efficient-techniques-a5ee28760c7a), condensing the core concepts into a runnable implementation.
-```
+This project is a companion to the detailed [article on efficient LLM fine-tuning](https://medium.com/@josephyan123/practical-fine-tuning-llms-lora-quantization-efficient-techniques-a5ee28760c7a), condensing the core concepts into a runnable implementation.
